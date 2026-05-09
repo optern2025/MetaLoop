@@ -278,7 +278,7 @@ export default function VRArena() {
   }, [])
 
   return (
-    <Canvas camera={{ position: [0, 2, 8], fov: 60 }} className="landing-canvas" style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
+    <Canvas camera={{ position: [0, 2, 8], fov: 75 }} className="landing-canvas" style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
       <color attach="background" args={['#050510']} />
       <fog attach="fog" args={['#050510', 6, 30]} />
 
@@ -297,85 +297,86 @@ export default function VRArena() {
       {/* ═══════════════════════════════════════════
            SECTION 1: HERO (y ≈ 2 to -2)
          ═══════════════════════════════════════════ */}
-      <VRHeadset position={[0, 1.2, -1]} scale={0.9} lensColor="#00f5ff" speed={0.7} />
-      <VRController position={[-2.2, -0.3, 0]} scale={0.8} color="#ff00ff" speed={0.7} />
-      <VRController position={[2.2, 0, 0]} scale={0.8} color="#00f5ff" speed={0.7} offset={1} mirror />
+      <VRHeadset position={[-10, 1.5, 1]} scale={1.1} lensColor="#00f5ff" speed={0.7} />
+      <VRHeadset position={[10, 0.5, 0]} scale={0.9} lensColor="#ff00ff" speed={0.6} offset={2} />
+      <VRController position={[-9, -0.8, 2]} scale={0.9} color="#ff00ff" speed={0.7} />
+      <VRController position={[9, -0.5, 1.5]} scale={0.9} color="#00f5ff" speed={0.7} offset={1} mirror />
 
       {/* ═══════════════════════════════════════════
            SECTION 2: ORGANIZERS (y ≈ -5 to -10)
          ═══════════════════════════════════════════ */}
-      <VRHeadset position={[-5, -6, -5]} scale={0.6} lensColor="#ff00ff" speed={0.5} offset={3} />
-      <VRHeadset position={[6, -8, -4]} scale={0.55} lensColor="#7b2ffa" speed={0.6} offset={6} />
-      <VRController position={[7, -7, -4]} scale={0.6} color="#39ff14" speed={0.5} offset={4} />
-      <Console position={[-4.5, -9, -6]} scale={0.55} color="#7b2ffa" speed={0.35} offset={2} />
+      <VRHeadset position={[-11, -6, 0]} scale={0.75} lensColor="#ff00ff" speed={0.5} offset={3} />
+      <VRHeadset position={[11, -8, -1]} scale={0.7} lensColor="#7b2ffa" speed={0.6} offset={6} />
+      <VRController position={[10, -7, 1]} scale={0.7} color="#39ff14" speed={0.5} offset={4} />
+      <Console position={[-10, -9, -1]} scale={0.65} color="#7b2ffa" speed={0.35} offset={2} />
 
       {/* ═══════════════════════════════════════════
            SECTION 3: ABOUT (y ≈ -12 to -18)
          ═══════════════════════════════════════════ */}
-      <VRHeadset position={[4, -13, -3]} scale={0.7} lensColor="#00f5ff" speed={0.5} offset={1} />
-      <VRHeadset position={[-3, -16, -5]} scale={0.5} lensColor="#ffd700" speed={0.45} offset={8} />
-      <VRController position={[-6, -14, -3]} scale={0.65} color="#ff00ff" speed={0.6} offset={7} mirror />
-      <VRController position={[5, -17, -4]} scale={0.55} color="#00f5ff" speed={0.55} offset={3} />
-      <Console position={[5, -15, -6]} scale={0.5} color="#00f5ff" speed={0.4} offset={5} />
+      <VRHeadset position={[10, -13, 0]} scale={0.8} lensColor="#00f5ff" speed={0.5} offset={1} />
+      <VRHeadset position={[-10, -16, -1]} scale={0.65} lensColor="#ffd700" speed={0.45} offset={8} />
+      <VRController position={[-11, -14, 1]} scale={0.75} color="#ff00ff" speed={0.6} offset={7} mirror />
+      <VRController position={[11, -17, 0]} scale={0.65} color="#00f5ff" speed={0.55} offset={3} />
+      <Console position={[10, -15, -2]} scale={0.6} color="#00f5ff" speed={0.4} offset={5} />
 
       {/* ═══════════════════════════════════════════
            SECTION 4: SCHEDULE (y ≈ -20 to -26)
          ═══════════════════════════════════════════ */}
-      <VRHeadset position={[-5, -21, -4]} scale={0.65} lensColor="#39ff14" speed={0.5} offset={4} />
-      <VRHeadset position={[6, -24, -5]} scale={0.5} lensColor="#ff00ff" speed={0.55} offset={9} />
-      <VRController position={[4, -22, -2]} scale={0.7} color="#ffd700" speed={0.5} offset={2} />
-      <VRController position={[-6, -25, -4]} scale={0.55} color="#7b2ffa" speed={0.6} offset={6} mirror />
-      <Console position={[-3, -23, -7]} scale={0.6} color="#ff00ff" speed={0.35} offset={8} />
+      <VRHeadset position={[-10, -21, 0]} scale={0.75} lensColor="#39ff14" speed={0.5} offset={4} />
+      <VRHeadset position={[11, -24, -1]} scale={0.65} lensColor="#ff00ff" speed={0.55} offset={9} />
+      <VRController position={[10, -22, 1]} scale={0.8} color="#ffd700" speed={0.5} offset={2} />
+      <VRController position={[-11, -25, 0]} scale={0.65} color="#7b2ffa" speed={0.6} offset={6} mirror />
+      <Console position={[-10, -23, -2]} scale={0.7} color="#ff00ff" speed={0.35} offset={8} />
 
       {/* ═══════════════════════════════════════════
            SECTION 5: TRACKS (y ≈ -28 to -32)
          ═══════════════════════════════════════════ */}
-      <VRHeadset position={[3, -29, -3]} scale={0.7} lensColor="#7b2ffa" speed={0.6} offset={2} />
-      <VRController position={[-5, -30, -3]} scale={0.65} color="#00f5ff" speed={0.5} offset={5} />
-      <VRController position={[6, -31, -5]} scale={0.5} color="#39ff14" speed={0.55} offset={10} mirror />
-      <Console position={[5, -30, -6]} scale={0.55} color="#ffd700" speed={0.4} offset={3} />
+      <VRHeadset position={[10, -29, 0]} scale={0.8} lensColor="#7b2ffa" speed={0.6} offset={2} />
+      <VRController position={[-11, -30, 1]} scale={0.75} color="#00f5ff" speed={0.5} offset={5} />
+      <VRController position={[11, -31, -1]} scale={0.6} color="#39ff14" speed={0.55} offset={10} mirror />
+      <Console position={[10, -30, -2]} scale={0.65} color="#ffd700" speed={0.4} offset={3} />
 
       {/* ═══════════════════════════════════════════
            SECTION 6: PRIZES (y ≈ -34 to -38)
          ═══════════════════════════════════════════ */}
-      <VRHeadset position={[-4, -35, -4]} scale={0.65} lensColor="#ffd700" speed={0.5} offset={5} />
-      <VRHeadset position={[5, -37, -5]} scale={0.5} lensColor="#00f5ff" speed={0.55} offset={11} />
-      <VRController position={[3, -36, -2]} scale={0.7} color="#ff00ff" speed={0.6} offset={1} />
-      <VRController position={[-6, -38, -4]} scale={0.6} color="#39ff14" speed={0.5} offset={7} mirror />
-      <Console position={[-2, -36, -7]} scale={0.6} color="#7b2ffa" speed={0.35} offset={9} />
+      <VRHeadset position={[-10, -35, 0]} scale={0.75} lensColor="#ffd700" speed={0.5} offset={5} />
+      <VRHeadset position={[10, -37, -1]} scale={0.65} lensColor="#00f5ff" speed={0.55} offset={11} />
+      <VRController position={[11, -36, 1]} scale={0.8} color="#ff00ff" speed={0.6} offset={1} />
+      <VRController position={[-11, -38, 0]} scale={0.7} color="#39ff14" speed={0.5} offset={7} mirror />
+      <Console position={[-10, -36, -2]} scale={0.7} color="#7b2ffa" speed={0.35} offset={9} />
 
       {/* ═══════════════════════════════════════════
            SECTION 7: ELIGIBILITY & RULES (y ≈ -40 to -44)
          ═══════════════════════════════════════════ */}
-      <VRHeadset position={[5, -41, -3]} scale={0.6} lensColor="#ff00ff" speed={0.5} offset={6} />
-      <VRHeadset position={[-5, -43, -5]} scale={0.5} lensColor="#39ff14" speed={0.45} offset={12} />
-      <VRController position={[-4, -42, -2]} scale={0.65} color="#ffd700" speed={0.55} offset={8} />
-      <Console position={[4, -42, -6]} scale={0.55} color="#00f5ff" speed={0.4} offset={4} />
+      <VRHeadset position={[10, -41, 0]} scale={0.7} lensColor="#ff00ff" speed={0.5} offset={6} />
+      <VRHeadset position={[-10, -43, -1]} scale={0.65} lensColor="#39ff14" speed={0.45} offset={12} />
+      <VRController position={[-11, -42, 1]} scale={0.75} color="#ffd700" speed={0.55} offset={8} />
+      <Console position={[11, -42, -2]} scale={0.65} color="#00f5ff" speed={0.4} offset={4} />
 
       {/* ═══════════════════════════════════════════
            SECTION 8: JUDGING (y ≈ -46 to -50)
          ═══════════════════════════════════════════ */}
-      <VRHeadset position={[-3, -47, -3]} scale={0.7} lensColor="#00f5ff" speed={0.6} offset={3} />
-      <VRHeadset position={[6, -49, -5]} scale={0.5} lensColor="#ffd700" speed={0.5} offset={7} />
-      <VRController position={[5, -48, -2]} scale={0.65} color="#7b2ffa" speed={0.55} offset={2} />
-      <VRController position={[-6, -50, -4]} scale={0.55} color="#ff00ff" speed={0.5} offset={9} mirror />
-      <Console position={[-4, -48, -7]} scale={0.55} color="#39ff14" speed={0.35} offset={6} />
+      <VRHeadset position={[-10, -47, 0]} scale={0.8} lensColor="#00f5ff" speed={0.6} offset={3} />
+      <VRHeadset position={[11, -49, -1]} scale={0.65} lensColor="#ffd700" speed={0.5} offset={7} />
+      <VRController position={[10, -48, 1]} scale={0.75} color="#7b2ffa" speed={0.55} offset={2} />
+      <VRController position={[-11, -50, 0]} scale={0.65} color="#ff00ff" speed={0.5} offset={9} mirror />
+      <Console position={[-10, -48, -2]} scale={0.65} color="#39ff14" speed={0.35} offset={6} />
 
       {/* ═══════════════════════════════════════════
            SECTION 9: FAQ (y ≈ -52 to -56)
          ═══════════════════════════════════════════ */}
-      <VRHeadset position={[4, -53, -4]} scale={0.65} lensColor="#7b2ffa" speed={0.5} offset={10} />
-      <VRHeadset position={[-5, -55, -5]} scale={0.55} lensColor="#ff00ff" speed={0.55} offset={4} />
-      <VRController position={[-3, -54, -2]} scale={0.7} color="#00f5ff" speed={0.6} offset={1} />
-      <VRController position={[6, -56, -4]} scale={0.6} color="#ffd700" speed={0.5} offset={8} mirror />
-      <Console position={[3, -54, -7]} scale={0.6} color="#ff00ff" speed={0.4} offset={11} />
+      <VRHeadset position={[10, -53, 0]} scale={0.75} lensColor="#7b2ffa" speed={0.5} offset={10} />
+      <VRHeadset position={[-10, -55, -1]} scale={0.7} lensColor="#ff00ff" speed={0.55} offset={4} />
+      <VRController position={[-11, -54, 1]} scale={0.8} color="#00f5ff" speed={0.6} offset={1} />
+      <VRController position={[11, -56, 0]} scale={0.7} color="#ffd700" speed={0.5} offset={8} mirror />
+      <Console position={[10, -54, -2]} scale={0.7} color="#ff00ff" speed={0.4} offset={11} />
 
       {/* ═══════════════════════════════════════════
            SECTION 10: FOOTER (y ≈ -58 to -60)
          ═══════════════════════════════════════════ */}
-      <VRHeadset position={[0, -59, -3]} scale={0.6} lensColor="#00f5ff" speed={0.5} offset={5} />
-      <VRController position={[-4, -59, -4]} scale={0.55} color="#39ff14" speed={0.55} offset={3} />
-      <VRController position={[4, -60, -3]} scale={0.55} color="#ff00ff" speed={0.5} offset={7} mirror />
+      <VRHeadset position={[-10, -59, 0]} scale={0.7} lensColor="#00f5ff" speed={0.5} offset={5} />
+      <VRController position={[-11, -59, 1]} scale={0.65} color="#39ff14" speed={0.55} offset={3} />
+      <VRController position={[11, -60, 0]} scale={0.65} color="#ff00ff" speed={0.5} offset={7} mirror />
 
       <Particles />
     </Canvas>

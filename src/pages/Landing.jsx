@@ -90,7 +90,7 @@ export default function Landing() {
         <h1 className="landing-title">METALOOP 2.0</h1>
         <p className="landing-subtitle" style={{ maxWidth: 700 }}>
           Step into the Loop. Break the Boundaries.<br />
-          <span style={{ fontSize: '0.85em', color: 'var(--text-muted)' }}>
+          <span style={{ fontSize: '0.9em', color: 'var(--text-muted)' }}>
             Where the next generation of immersive VR experiences is built — in 36 uninterrupted hours of innovation,
             creativity, and code.
           </span>
@@ -128,9 +128,9 @@ export default function Landing() {
                     org.name.charAt(0)
                   )}
                 </div>
-                <h3 style={{ fontSize: '1.1rem', marginBottom: 2 }}>{org.name}</h3>
+                <h3 style={{ fontSize: '1.3rem', marginBottom: 2 }}>{org.name}</h3>
                 <span className="badge" style={{ background: `${org.color}22`, color: org.color, marginBottom: 12 }}>{org.role}</span>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: 1.6 }}>{org.desc}</p>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: 1.6 }}>{org.desc}</p>
               </div>
             ))}
           </div>
@@ -140,21 +140,21 @@ export default function Landing() {
         <section className="landing-section">
           <h2 className="section-heading">What is MetaLoop 2.0?</h2>
           <div className="glass-card" style={{ maxWidth: 800, margin: '0 auto' }}>
-            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: 16 }}>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: 16 }}>
               MetaLoop 2.0 is the premier VR gaming hackathon pushing the frontier of immersive technology. Whether
               you are a developer, designer, storyteller, or world-builder — this is your arena.
             </p>
-            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '0.95rem', marginBottom: 16 }}>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, fontSize: '1.1rem', marginBottom: 16 }}>
               <strong style={{ color: 'var(--cyan)' }}>36 hours. Zero sleep. Infinite possibility.</strong> Teams will ideate, prototype, and demo groundbreaking VR gaming
               experiences, evaluated by industry pioneers and XR visionaries.
             </p>
-            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, fontSize: '0.85rem', fontStyle: 'italic' }}>
+            <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, fontSize: '1rem', fontStyle: 'italic' }}>
               Powered by DeepLoop Technologies, Optern, and JTBI — accelerating the
               next wave of spatial computing and digital entertainment innovation.
             </p>
           </div>
 
-          <h3 style={{ fontFamily: 'Orbitron', fontSize: '1rem', marginTop: 32, marginBottom: 16, color: 'var(--magenta)' }}>Who Should Attend?</h3>
+          <h3 style={{ fontFamily: 'Orbitron', fontSize: '1.2rem', marginTop: 32, marginBottom: 16, color: 'var(--magenta)' }}>Who Should Attend?</h3>
           <div className="glass-card attend-list" style={{ maxWidth: 800, margin: '0 auto' }}>
             {[
               'Game Developers & XR Engineers passionate about VR platforms',
@@ -195,10 +195,10 @@ export default function Landing() {
         <section className="landing-section">
           <h2 className="section-heading">Choose Your Reality</h2>
           <div className="glass-card" style={{ textAlign: 'center', padding: 40 }}>
-            <div style={{ fontSize: '3rem', marginBottom: 16 }}>🎮</div>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>
+            <div style={{ fontSize: '3.5rem', marginBottom: 16 }}>🎮</div>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem' }}>
               Tracks will be revealed on the day of the event.<br />
-              <span style={{ color: 'var(--cyan)', fontSize: '0.85rem' }}>Stay tuned for the big reveal!</span>
+              <span style={{ color: 'var(--cyan)', fontSize: '1rem' }}>Stay tuned for the big reveal!</span>
             </p>
           </div>
         </section>
@@ -228,7 +228,7 @@ export default function Landing() {
           <h2 className="section-heading">Who Can Participate</h2>
           <div className="grid-2" style={{ maxWidth: 900, margin: '0 auto' }}>
             <div className="glass-card">
-              <h3 style={{ fontSize: '1rem', color: 'var(--cyan)', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}><Users size={18} /> Eligibility</h3>
+              <h3 style={{ fontSize: '1.2rem', color: 'var(--cyan)', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}><Users size={20} /> Eligibility</h3>
               {['Open to students, graduates, and early-career professionals',
                 'All backgrounds welcome: engineering, design, arts, business, or research',
                 'International participants are warmly welcome to register',
@@ -236,7 +236,7 @@ export default function Landing() {
               ].map((r, i) => <p key={i} className="rule-item"><span style={{ color: 'var(--cyan)' }}>›</span> {r}</p>)}
             </div>
             <div className="glass-card">
-              <h3 style={{ fontSize: '1rem', color: 'var(--magenta)', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}><Shield size={18} /> Team Rules</h3>
+              <h3 style={{ fontSize: '1.2rem', color: 'var(--magenta)', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}><Shield size={20} /> Team Rules</h3>
               {['Team size: minimum 3 members, maximum 4 members',
                 'Solo participation is not permitted — all participants must be in a team',
                 'Team formation sessions will be held on Day 1 morning for solo registrants',
@@ -246,7 +246,7 @@ export default function Landing() {
             </div>
           </div>
           <div className="glass-card" style={{ maxWidth: 900, margin: '20px auto 0' }}>
-            <h3 style={{ fontSize: '1rem', color: 'var(--purple-light)', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}><BookOpen size={18} /> Project Rules</h3>
+            <h3 style={{ fontSize: '1.2rem', color: 'var(--purple-light)', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}><BookOpen size={20} /> Project Rules</h3>
             {['All development must begin at the official kick-off at 11:00 AM on Day 1',
               'Pre-built codebases, existing products, or forks of published projects are not permitted',
               'Open-source libraries, game engines (Unity), and APIs are allowed',
@@ -265,7 +265,7 @@ export default function Landing() {
                 <div className="judging-pct" style={{ color: c.color }}>{c.pct}</div>
                 <div className="judging-icon" style={{ color: c.color }}>{c.icon}</div>
                 <h4 style={{ marginBottom: 8 }}>{c.title}</h4>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: 1.5 }}>{c.desc}</p>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: 1.5 }}>{c.desc}</p>
                 <div className="judging-bar">
                   <div className="judging-fill" style={{ width: c.pct, background: c.color }} />
                 </div>
@@ -298,10 +298,10 @@ export default function Landing() {
         {/* FOOTER */}
         <footer className="landing-footer">
           <div className="footer-brand">
-            <h2 style={{ fontSize: '1.5rem', marginBottom: 4 }} className="text-gradient">METALOOP 2.0</h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>A VR Gaming Hackathon · 36 Hours · Infinite Worlds</p>
+            <h2 style={{ fontSize: '1.8rem', marginBottom: 4 }} className="text-gradient">METALOOP 2.0</h2>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1rem' }}>A VR Gaming Hackathon · 36 Hours · Infinite Worlds</p>
           </div>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: 8 }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', marginBottom: 8 }}>
             Organized by <span style={{ color: 'var(--cyan)' }}>DeepLoop Technologies</span>, <span style={{ color: 'var(--magenta)' }}>Optern</span> & <span style={{ color: 'var(--purple-light)' }}>JTBI</span>
           </p>
           <div className="footer-links">
