@@ -23,7 +23,7 @@ function NeonGrid() {
   const { camera } = useThree()
   useFrame((s) => {
     ref.current.position.y = camera.position.y - 4
-    ref.current.position.z = (s.clock.elapsedTime * 0.4) % 2
+    ref.current.position.z = (s.clock.elapsedTime * 0.4) % 1
   })
   return (
     <group ref={ref} rotation={[-Math.PI / 2, 0, 0]}>
@@ -33,7 +33,7 @@ function NeonGrid() {
 }
 
 /* ─── Sleek VR Headset ─── */
-function VRHeadset({ position=[0,0,0], scale=1, lensColor='#00f5ff', speed=1, offset=0 }) {
+function VRHeadset({ position = [0, 0, 0], scale = 1, lensColor = '#00f5ff', speed = 1, offset = 0 }) {
   const g = useRef()
   useFrame((s) => {
     const t = s.clock.elapsedTime * speed + offset
@@ -126,7 +126,7 @@ function VRHeadset({ position=[0,0,0], scale=1, lensColor='#00f5ff', speed=1, of
 }
 
 /* ─── VR Touch Controller ─── */
-function VRController({ position=[0,0,0], scale=1, color='#00f5ff', speed=1, offset=0, mirror=false }) {
+function VRController({ position = [0, 0, 0], scale = 1, color = '#00f5ff', speed = 1, offset = 0, mirror = false }) {
   const g = useRef()
   const dir = mirror ? -1 : 1
   useFrame((s) => {
@@ -149,19 +149,19 @@ function VRController({ position=[0,0,0], scale=1, color='#00f5ff', speed=1, off
         </mesh>
         {/* Top face plate */}
         <mesh position={[0, 0.3, 0]} scale={[0.3, 0.06, 0.3]}>
-          <sphereGeometry args={[1, 16, 8, 0, Math.PI*2, 0, Math.PI/2]} />
+          <sphereGeometry args={[1, 16, 8, 0, Math.PI * 2, 0, Math.PI / 2]} />
           <meshStandardMaterial color="#bbbccc" metalness={0.4} roughness={0.25} />
         </mesh>
         {/* Thumbstick */}
-        <mesh position={[0.03*dir, 0.35, -0.04]}>
+        <mesh position={[0.03 * dir, 0.35, -0.04]}>
           <cylinderGeometry args={[0.05, 0.05, 0.06, 12]} />
           <meshStandardMaterial color="#666" metalness={0.8} roughness={0.15} />
         </mesh>
         {/* Buttons */}
-        <Sphere args={[0.035, 10, 10]} position={[-0.06*dir, 0.34, 0.06]}>
+        <Sphere args={[0.035, 10, 10]} position={[-0.06 * dir, 0.34, 0.06]}>
           <meshStandardMaterial color={color} emissive={color} emissiveIntensity={2} />
         </Sphere>
-        <Sphere args={[0.035, 10, 10]} position={[0.05*dir, 0.34, 0.1]}>
+        <Sphere args={[0.035, 10, 10]} position={[0.05 * dir, 0.34, 0.1]}>
           <meshStandardMaterial color="#ff00ff" emissive="#ff00ff" emissiveIntensity={2} />
         </Sphere>
         {/* Trigger */}
@@ -179,7 +179,7 @@ function VRController({ position=[0,0,0], scale=1, color='#00f5ff', speed=1, off
 }
 
 /* ─── Gaming Console (PS5 style) ─── */
-function Console({ position=[0,0,0], scale=1, color='#7b2ffa', speed=1, offset=0 }) {
+function Console({ position = [0, 0, 0], scale = 1, color = '#7b2ffa', speed = 1, offset = 0 }) {
   const g = useRef()
   useFrame((s) => {
     const t = s.clock.elapsedTime * speed + offset
@@ -230,8 +230,8 @@ function Particles() {
     const arr = new Float32Array(count * 3)
     for (let i = 0; i < count * 3; i += 3) {
       arr[i] = (Math.random() - 0.5) * 35      // x spread
-      arr[i+1] = (Math.random() - 0.5) * 80     // y spread (massive vertical)
-      arr[i+2] = (Math.random() - 0.5) * 25     // z spread
+      arr[i + 1] = (Math.random() - 0.5) * 80     // y spread (massive vertical)
+      arr[i + 2] = (Math.random() - 0.5) * 25     // z spread
     }
     return arr
   }, [])
