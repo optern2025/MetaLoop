@@ -27,7 +27,7 @@ function NeonGrid() {
   })
   return (
     <group ref={ref} rotation={[-Math.PI / 2, 0, 0]}>
-      <gridHelper args={[80, 80, '#1a1a4a', '#0d0d2a']} />
+      {/*<gridHelper args={[80, 80, '#1a1a4a', '#0d0d2a']} />*/}
     </group>
   )
 }
