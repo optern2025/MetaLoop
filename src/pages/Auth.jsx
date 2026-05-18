@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signUp, signIn, getProfile } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
@@ -13,7 +13,15 @@ export default function Auth() {
   const [role, setRole] = useState('candidate')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [debugMsg, setDebugMsg] = useState('Testing database connection...')
   const navigate = useNavigate()
+
+  // Diagnostic network test
+  useEffect(() => {
+    fetch('https://cnvymzsgujibqsroqusn.supabase.co/auth/v1/health')
+      .then(res => setDebugMsg(`Connection OK (${res.status})`))
+      .catch(err => setDebugMsg(`NETWORK BLOCKED by your ISP/Firewall`))
+  }, [])
   const { refreshProfile } = useAuth()
 
   const handleSubmit = async (e) => {
@@ -90,6 +98,11 @@ export default function Auth() {
         <div className="auth-tabs">
           <button className={`auth-tab ${isLogin ? 'active' : ''}`} onClick={() => setIsLogin(true)}>Sign In</button>
           <button className={`auth-tab ${!isLogin ? 'active' : ''}`} onClick={() => setIsLogin(false)}>Register</button>
+        </div>
+
+        {/* Diagnostic Test Display */}
+        <div style={{ textAlign: 'center', marginBottom: '15px', padding: '10px', backgroundColor: debugMsg.includes('OK') ? 'rgba(0,255,0,0.1)' : 'rgba(255,0,0,0.1)', color: debugMsg.includes('OK') ? '#4ade80' : '#f87171', borderRadius: '4px', fontSize: '14px', fontWeight: 'bold' }}>
+          Diagnostic: {debugMsg}
         </div>
 
         {error && <div className="auth-error">{error}</div>}
