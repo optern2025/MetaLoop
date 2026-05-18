@@ -23,7 +23,7 @@ function NeonGrid() {
   const { camera } = useThree()
   useFrame((s) => {
     ref.current.position.y = camera.position.y - 4
-    ref.current.position.z = (s.clock.elapsedTime * 0.4) % 1
+    ref.current.position.z = ((performance.now() / 1000) * 0.4) % 1
   })
   return (
     <group ref={ref} rotation={[-Math.PI / 2, 0, 0]}>
@@ -36,7 +36,7 @@ function NeonGrid() {
 function VRHeadset({ position = [0, 0, 0], scale = 1, lensColor = '#00f5ff', speed = 1, offset = 0 }) {
   const g = useRef()
   useFrame((s) => {
-    const t = s.clock.elapsedTime * speed + offset
+    const t = (performance.now() / 1000) * speed + offset
     g.current.rotation.y = Math.sin(t * 0.4) * 0.3
     g.current.rotation.x = Math.sin(t * 0.25) * 0.1
     g.current.position.y = position[1] + Math.sin(t * 0.6) * 0.35
@@ -130,7 +130,7 @@ function VRController({ position = [0, 0, 0], scale = 1, color = '#00f5ff', spee
   const g = useRef()
   const dir = mirror ? -1 : 1
   useFrame((s) => {
-    const t = s.clock.elapsedTime * speed + offset
+    const t = (performance.now() / 1000) * speed + offset
     g.current.rotation.z = dir * (0.25 + Math.sin(t * 0.4) * 0.15)
     g.current.rotation.y = Math.sin(t * 0.3) * 0.4
     g.current.position.y = position[1] + Math.sin(t * 0.65) * 0.3
@@ -182,7 +182,7 @@ function VRController({ position = [0, 0, 0], scale = 1, color = '#00f5ff', spee
 function Console({ position = [0, 0, 0], scale = 1, color = '#7b2ffa', speed = 1, offset = 0 }) {
   const g = useRef()
   useFrame((s) => {
-    const t = s.clock.elapsedTime * speed + offset
+    const t = (performance.now() / 1000) * speed + offset
     g.current.rotation.y = Math.sin(t * 0.2) * 0.3
     g.current.position.y = position[1] + Math.sin(t * 0.35) * 0.25
   })
@@ -235,7 +235,7 @@ function Particles() {
     }
     return arr
   }, [])
-  useFrame((s) => { ref.current.rotation.y = s.clock.elapsedTime * 0.005 })
+  useFrame((s) => { ref.current.rotation.y = (performance.now() / 1000) * 0.005 })
   return (
     <points ref={ref}>
       <bufferGeometry>
