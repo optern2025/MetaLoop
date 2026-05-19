@@ -10,7 +10,11 @@ if (!supabaseAnonKey || typeof supabaseAnonKey !== 'string' || supabaseAnonKey.t
   supabaseAnonKey = 'sb_publishable_iFQtAxeJsTsS8cgYlKRbPg_jkHAuzMt'
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  global: {
+    fetch: (...args) => fetch(...args),
+  },
+})
 
 /* ─── Auth Helpers ─── */
 
