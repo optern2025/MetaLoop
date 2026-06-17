@@ -18,10 +18,6 @@ export default function Auth() {
 
   // Diagnostic network test
   useEffect(() => {
-<<<<<<< HEAD
-    fetch('https://cnvymzsgujibqsroqusn.supabase.co/auth/v1/health')
-      .then(res => setDebugMsg(`Connection OK (${res.status})`))
-=======
     fetch('https://cnvymzsgujibqsroqusn.supabase.co/auth/v1/health', {
       headers: {
         'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY
@@ -31,7 +27,6 @@ export default function Auth() {
         if (res.ok) setDebugMsg(`Connection OK (${res.status})`)
         else throw new Error('Unauthorized')
       })
->>>>>>> 4b97dab (Deadlock Fixed)
       .catch(err => setDebugMsg(`NETWORK BLOCKED by your ISP/Firewall`))
   }, [])
   const { refreshProfile } = useAuth()
