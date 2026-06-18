@@ -107,10 +107,10 @@ export default function Auth() {
           <button className={`auth-tab ${!isLogin ? 'active' : ''}`} onClick={() => setIsLogin(false)}>Register</button>
         </div>
 
-        {/* Diagnostic Test Display */}
+        {/* Diagnostic Test Display 
         <div style={{ textAlign: 'center', marginBottom: '15px', padding: '10px', backgroundColor: debugMsg.includes('OK') ? 'rgba(0,255,0,0.1)' : 'rgba(255,0,0,0.1)', color: debugMsg.includes('OK') ? '#4ade80' : '#f87171', borderRadius: '4px', fontSize: '14px', fontWeight: 'bold' }}>
           Diagnostic: {debugMsg}
-        </div>
+        </div>*/}
 
         {error && <div className="auth-error">{error}</div>}
 
