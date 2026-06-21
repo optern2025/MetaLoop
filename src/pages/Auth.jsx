@@ -12,6 +12,7 @@ export default function Auth() {
   const [fullName, setFullName] = useState('')
   const [role, setRole] = useState('candidate')
   const [error, setError] = useState('')
+  const [toastMsg, setToastMsg] = useState('')
   const [loading, setLoading] = useState(false)
   const [debugMsg, setDebugMsg] = useState('Testing database connection...')
   const navigate = useNavigate()
@@ -55,7 +56,20 @@ export default function Auth() {
         }
         authData = await signUp({ email, password, fullName, role })
       }
-
+      if (!authData?.session) {
+          clearTimeout(safetyTimer)
+          
+          // Trigger the green toast instead of the red error
+          setToastMsg('Confirmation Email sent. Please check your spam folder.')
+          setLoading(false)
+          
+          // Auto-hide the message after 8 seconds
+          setTimeout(() => {
+            setToastMsg('')
+          }, 8000)
+          
+          return 
+        }
       // Fetch the user's profile to determine their actual role
       const userId = authData?.user?.id
       let actualRole = role // fallback for new signups
@@ -107,10 +121,10 @@ export default function Auth() {
           <button className={`auth-tab ${!isLogin ? 'active' : ''}`} onClick={() => setIsLogin(false)}>Register</button>
         </div>
 
-        {/* Diagnostic Test Display */}
+        {/* Diagnostic Test Display 
         <div style={{ textAlign: 'center', marginBottom: '15px', padding: '10px', backgroundColor: debugMsg.includes('OK') ? 'rgba(0,255,0,0.1)' : 'rgba(255,0,0,0.1)', color: debugMsg.includes('OK') ? '#4ade80' : '#f87171', borderRadius: '4px', fontSize: '14px', fontWeight: 'bold' }}>
           Diagnostic: {debugMsg}
-        </div>
+        </div>*/}
 
         {error && <div className="auth-error">{error}</div>}
 
@@ -159,6 +173,12 @@ export default function Auth() {
           )}
         </div>
       </div>
+      {/* TOAST NOTIFICATION */}
+      {toastMsg && (
+        <div className="success-toast">
+          {toastMsg}
+        </div>
+      )}
     </div>
   )
 }
