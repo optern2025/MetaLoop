@@ -70,6 +70,11 @@ export async function updateProfile(userId, updates) {
 /* ─── Team Helpers ─── */
 
 export async function createTeam(teamName, leaderId) {
+  // Checks if the user is already in a team before creating a new one
+  const existingTeam = await getMyTeam(leaderId);
+  if (existingTeam) throw new Error('You are already part of a team. You cannot create another.');
+  // ------------------------
+
   const { data: team, error: teamError } = await supabase
     .from('teams')
     .insert({ team_name: teamName, leader_id: leaderId })
@@ -85,6 +90,11 @@ export async function createTeam(teamName, leaderId) {
 }
 
 export async function joinTeam(inviteCode, userId) {
+  // Checks if the user is already in a team before joining a new one
+  const existingTeam = await getMyTeam(userId);
+  if (existingTeam) throw new Error('You are already in a team. You cannot join another.');
+  // ------------------------
+
   const { data: team, error: teamError } = await supabase
     .from('teams')
     .select('*')
