@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react'
-import { getAllUsers, getAllSubmissionsAdmin, getAllProblems, supabase } from '../../lib/supabase'
 import DashboardLayout from '../../components/DashboardLayout'
 import { Shield, Users, FileText, ClipboardCheck, Trophy, Settings, Search, Download, Trash2 } from 'lucide-react'
+import { getAllUsers, getAllSubmissionsAdmin, getAllProblems, supabase, getHackathonConfig, updateHackathonConfig } from '../../lib/supabase'
 
 export default function AdminDashboard() {
   const [users, setUsers] = useState([])
   const [submissions, setSubmissions] = useState([])
   const [problems, setProblems] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
+  const [config, setConfig] = useState(null)
 
   useEffect(() => { loadData() }, [])
 
   async function loadData() {
     try {
-      const [u, s, p] = await Promise.all([getAllUsers(), getAllSubmissionsAdmin(), getAllProblems()])
+      const [u, s, p] = await Promise.all([getAllUsers(), getAllSubmissionsAdmin(), getAllProblems(), getHackathonConfig()])
       setUsers(u || []); setSubmissions(s || []); setProblems(p || [])
     } catch (err) { console.error(err) }
   }
@@ -80,6 +81,23 @@ export default function AdminDashboard() {
     { icon: <ClipboardCheck size={22} />, value: `${evaluated}/${submissions.length}`, label: 'Evaluated', cls: 'green' },
   ]
 
+  // --- NEW: LOCK REGISTRATIONS FUNCTION ---
+  const handleToggleRegistration = async () => {
+    if (!config) return;
+    const currentSettings = config.settings || {};
+    const isLocked = currentSettings.registrations_locked === true;
+    const newSettings = { ...currentSettings, registrations_locked: !isLocked };
+
+    try {
+      await updateHackathonConfig(config.id, { settings: newSettings });
+      setConfig({ ...config, settings: newSettings });
+      alert(isLocked ? "🔓 Registrations are now OPEN." : "🔒 Registrations are now LOCKED.");
+    } catch (err) {
+      console.error(err);
+      alert("Error updating event configuration.");
+    }
+  }
+
   return (
     <DashboardLayout>
       <div className="dashboard-header">
@@ -104,7 +122,16 @@ export default function AdminDashboard() {
         <div className="glass-card">
           <h3 className="section-title"><Settings size={18} className="icon" /> Quick Actions</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 16 }}>
-            {/* NEW BUTTON INSERTED HERE */}
+            {/* THE NEW TOGGLE BUTTON */}
+            <button 
+              onClick={handleToggleRegistration} 
+              className={`btn ${config?.settings?.registrations_locked ? 'btn-success' : 'btn-danger'} btn-sm`} 
+              style={{ justifyContent: 'center' }}
+            >
+              {config?.settings?.registrations_locked ? '🔓 Unlock Registrations' : '🔒 Lock Registrations'}
+            </button>
+
+            {/* BUTTON INSERTED HERE */}
             <button onClick={handleRecalculate} className="btn btn-primary btn-sm" style={{ justifyContent: 'center' }}>
               <Trophy size={16} /> Recalculate Leaderboard
             </button>

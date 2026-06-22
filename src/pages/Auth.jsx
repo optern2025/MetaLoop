@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { signUp, signIn, getProfile } from '../lib/supabase'
+import { signUp, signIn, getProfile, getHackathonConfig } from '../lib/supabase'
 import { useAuth } from '../contexts/AuthContext'
 import { DashboardBg } from '../components/3d/VRArena'
 import { Mail, Lock, User, ArrowLeft } from 'lucide-react'
@@ -13,12 +13,19 @@ export default function Auth() {
   const [role, setRole] = useState('candidate')
   const [error, setError] = useState('')
   const [toastMsg, setToastMsg] = useState('')
+  const [isLocked, setIsLocked] = useState(false)
   const [loading, setLoading] = useState(false)
   const [debugMsg, setDebugMsg] = useState('Testing database connection...')
   const navigate = useNavigate()
 
   // Diagnostic network test
   useEffect(() => {
+    getHackathonConfig().then(config => {
+      if (config?.settings?.registrations_locked) {
+        setIsLocked(true)
+      }
+    }).catch(err => console.log("Config load skipped"));
+
     fetch('https://cnvymzsgujibqsroqusn.supabase.co/auth/v1/health', {
       headers: {
         'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY
@@ -44,6 +51,15 @@ export default function Auth() {
     }, 12000)
 
     try {
+
+      // --- NEW: THE BOUNCER ---
+      if (!isLogin && isLocked) {
+        setError('Registrations are currently closed by the administrator.');
+        setLoading(false);
+        return;
+      }
+      // -------------------------
+
       let authData
       if (isLogin) {
         authData = await signIn({ email, password })
@@ -128,42 +144,66 @@ export default function Auth() {
 
         {error && <div className="auth-error">{error}</div>}
 
-        <form onSubmit={handleSubmit}>
-          {!isLogin && (
-            <div className="form-group">
-              <label className="form-label">Full Name</label>
-              <input className="form-input" type="text" value={fullName} onChange={e => setFullName(e.target.value)} placeholder="John Doe" required />
-            </div>
-          )}
-
-          <div className="form-group">
-            <label className="form-label">Email</label>
-            <input className="form-input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="hacker@arena.io" required />
+        {/* THE TERNARY BOUNCER */}
+        {!isLogin && isLocked ? (
+          
+          /* IF TRUE: Show the Red Warning Box */
+          <div style={{ 
+            textAlign: 'center', 
+            padding: '30px 20px', 
+            background: 'rgba(255, 68, 102, 0.1)', 
+            border: '1px solid var(--danger)', 
+            borderRadius: '8px', 
+            margin: '20px 0' 
+          }}>
+            <h3 style={{ color: 'var(--danger)', margin: '0 0 10px 0' }}>🔒 Arena Closed</h3>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: 0 }}>
+              The event has officially started and new registrations are no longer being accepted.
+            </p>
           </div>
 
-          <div className="form-group">
-            <label className="form-label">Password</label>
-            <input className="form-input" type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" required minLength={6} />
-          </div>
-
-          {!isLogin && (
-            <div className="form-group">
-              <label className="form-label">Register as</label>
-              <div className="auth-role-select">
-                <button type="button" className={`auth-role-btn ${role === 'candidate' ? 'active' : ''}`} onClick={() => setRole('candidate')}>
-                  🎮 Candidate
-                </button>
-                <button type="button" className={`auth-role-btn ${role === 'jury' ? 'active' : ''}`} onClick={() => setRole('jury')}>
-                  ⚖️ Jury
-                </button>
+        ) : (
+          
+          /* IF FALSE: Show your exact original form */
+          <form onSubmit={handleSubmit}>
+            {!isLogin && (
+              <div className="form-group">
+                <label className="form-label">Full Name</label>
+                <input className="form-input" type="text" value={fullName} onChange={e => setFullName(e.target.value)} placeholder="John Doe" required />
               </div>
-            </div>
-          )}
+            )}
 
-          <button type="submit" className="btn btn-primary" disabled={loading} style={{ width: '100%' }}>
-            {loading ? 'Processing...' : isLogin ? 'Enter Arena' : 'Create Account'}
-          </button>
-        </form>
+            <div className="form-group">
+              <label className="form-label">Email</label>
+              <input className="form-input" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="hacker@arena.io" required />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Password</label>
+              <input className="form-input" type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••" required minLength={6} />
+            </div>
+
+            {/* Jury and Candidate buttons preserved! */}
+            {!isLogin && (
+              <div className="form-group">
+                <label className="form-label">Register as</label>
+                <div className="auth-role-select">
+                  <button type="button" className={`auth-role-btn ${role === 'candidate' ? 'active' : ''}`} onClick={() => setRole('candidate')}>
+                    🎮 Candidate
+                  </button>
+                  <button type="button" className={`auth-role-btn ${role === 'jury' ? 'active' : ''}`} onClick={() => setRole('jury')}>
+                    ⚖️ Jury
+                  </button>
+                </div>
+              </div>
+            )}
+
+            <button type="submit" className="btn btn-primary" disabled={loading} style={{ width: '100%' }}>
+              {loading ? 'Processing...' : isLogin ? 'Enter Arena' : 'Create Account'}
+            </button>
+          </form>
+
+        )}
 
         <div className="auth-footer">
           {isLogin ? (
